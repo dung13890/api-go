@@ -1,0 +1,14 @@
+{
+  "debug": true,
+  "server": {
+    "address": ":3000"
+  },
+  "key": "secret",
+  "mongo": {
+      "host": "mongo",
+      "port": "27017",
+      "user": "",
+      "pass": "",
+      "database": "api"
+  }
+}
