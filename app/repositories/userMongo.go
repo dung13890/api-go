@@ -1,8 +1,6 @@
 package repositories
 
 import (
-	"fmt"
-
 	"github.com/dung13890/api-go/app/contracts"
 	"github.com/dung13890/api-go/models"
 )
@@ -14,8 +12,7 @@ func UserMongoImplement() contracts.UserRepo {
 	return &UserMongo{}
 }
 
-func (u *UserMongo) Login(p models.User) error {
-	fmt.Println(p.UserName)
+func (u *UserMongo) Login(p models.User) models.User {
 
-	return nil
+	return p
 }
