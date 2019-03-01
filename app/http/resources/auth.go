@@ -5,11 +5,32 @@ import (
 )
 
 type resource struct {
-	Data     interface{} `json:"data,omitempty"`
-	Messages []string    `json:"messages,omitempty"`
+	Data     interface{} `json:"data"`
+	Messages []string    `json:"messages"`
 }
 
-func Login(rs models.User, m string) resource {
+func Error(m string) resource {
+	return resource{
+		Data:     nil,
+		Messages: []string{m},
+	}
+}
+
+func Login(rs map[string]string, m string) resource {
+	return resource{
+		Data:     rs,
+		Messages: []string{m},
+	}
+}
+
+func Collection(rs []models.User, m string) resource {
+	return resource{
+		Data:     rs,
+		Messages: []string{m},
+	}
+}
+
+func Model(rs models.User, m string) resource {
 	return resource{
 		Data:     rs,
 		Messages: []string{m},
