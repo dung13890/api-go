@@ -18,11 +18,13 @@ type Mongo struct {
 	User     string `json:"user"`
 	Pass     string `json:"pass"`
 	Database string `json:"database"`
+	Timeout  int    `json:"timeout"`
 }
 
 type Config struct {
 	Server `json:"server"`
 	Key    string `json:"key"`
+	Expire int    `json:"expire"`
 	Mongo  `json:"mongo"`
 }
 
@@ -36,6 +38,10 @@ func Init() {
 
 func GetString(key string) string {
 	return getKey(key).(string)
+}
+
+func GetInt(key string) int {
+	return getKey(key).(int)
 }
 
 func GetObject(key string) interface{} {

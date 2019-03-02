@@ -4,11 +4,13 @@
     "address": ":3000"
   },
   "key": "secret",
+  "expire": 72,
   "mongo": {
       "host": "mongo",
       "port": "27017",
       "user": "",
       "pass": "",
-      "database": "api"
+      "database": "api",
+      "timeout": 60
   }
 }

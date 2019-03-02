@@ -9,6 +9,8 @@ import (
 func main() {
 	config.Init()
 	e := echo.New()
-	routes.Init(e)
+	s := config.NewSession()
+	defer s.Close()
+	routes.Init(e, s.Copy())
 	e.Logger.Fatal(e.Start(config.GetString("server.address")))
 }
