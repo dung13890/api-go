@@ -2,10 +2,10 @@ package handlers
 
 import (
 	"context"
-	"net/http"
 
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/dung13890/api-go/app/http/resources"
+	"github.com/dung13890/api-go/app/http/validators"
 	"github.com/dung13890/api-go/app/services"
 	"github.com/dung13890/api-go/models"
 	"github.com/labstack/echo"
@@ -22,12 +22,16 @@ func (a *HttpAuthHandler) Login(c echo.Context) error {
 	if ctx == nil {
 		ctx = context.Background()
 	}
+	errV := validators.Login(&params)
+	if len(errV) > 0 {
+		return resources.Validate(c, errV)
+	}
 	rs, err := a.AuthService.Login(ctx, params)
 	if err != nil {
-		return c.JSON(http.StatusNotFound, resources.Error("Login failed!"))
+		return resources.Error(c, "Login Faild")
 	}
 
-	return c.JSON(http.StatusOK, resources.Login(rs, "Login success!"))
+	return resources.Login(c, rs)
 }
 
 func (a *HttpAuthHandler) Info(c echo.Context) error {
@@ -37,17 +41,20 @@ func (a *HttpAuthHandler) Info(c echo.Context) error {
 
 	rs, err := a.AuthService.Info(ctx, claims)
 	if err != nil {
-		return c.JSON(http.StatusNotFound, resources.Error("Failed!"))
+		return resources.Error(c, err.Error())
 	}
 
-	return c.JSON(http.StatusOK, resources.Model(rs, "Success!"))
+	return resources.Model(c, rs)
 }
 
 func (a *HttpAuthHandler) Get(c echo.Context) error {
 	ctx := c.Request().Context()
-	rs := a.AuthService.Get(ctx)
+	rs, err := a.AuthService.Get(ctx)
+	if err != nil {
+		return resources.Error(c, err.Error())
+	}
 
-	return c.JSON(http.StatusOK, resources.Collection(rs, "Success!"))
+	return resources.Collection(c, rs, "success")
 }
 
 func (a *HttpAuthHandler) Store(c echo.Context) error {
@@ -59,8 +66,8 @@ func (a *HttpAuthHandler) Store(c echo.Context) error {
 	}
 	rs, err := a.AuthService.Store(ctx, params)
 	if err != nil {
-		return c.JSON(http.StatusNotFound, resources.Error("Error!"))
+		return resources.Error(c, err.Error())
 	}
 
-	return c.JSON(http.StatusOK, resources.Model(rs, "Success!"))
+	return resources.Model(c, rs)
 }

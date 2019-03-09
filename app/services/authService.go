@@ -25,6 +25,7 @@ func NewAuthService(a contracts.UserRepo) AuthService {
 func (a AuthService) Login(c context.Context, m models.User) (map[string]string, error) {
 	_, cancel := context.WithCancel(c)
 	defer cancel()
+
 	user, err := a.userRepo.FindByEmail(m.Email)
 
 	if err != nil {
@@ -46,7 +47,7 @@ func (a AuthService) Login(c context.Context, m models.User) (map[string]string,
 
 }
 
-func (a AuthService) Get(c context.Context) []models.User {
+func (a AuthService) Get(c context.Context) ([]models.User, error) {
 	_, cancel := context.WithCancel(c)
 	defer cancel()
 

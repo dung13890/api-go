@@ -10,6 +10,25 @@
   version = "v3.2.0"
 
 [[projects]]
+  digest = "1:709292c015123a3bc69ea970dc9abd6667170e7fbf5cdeb10c6d14b250d3385f"
+  name = "github.com/go-playground/locales"
+  packages = [
+    ".",
+    "currency",
+  ]
+  pruneopts = ""
+  revision = "f63010822830b6fe52288ee52d5a1151088ce039"
+  version = "v0.12.1"
+
+[[projects]]
+  digest = "1:7ca0f6f2a364f603e843763d35c979b595d71159982791de27f9ec40d532876b"
+  name = "github.com/go-playground/universal-translator"
+  packages = ["."]
+  pruneopts = ""
+  revision = "b32fa301c9fe55953584134cb6853a13c87ec0a1"
+  version = "v0.16.0"
+
+[[projects]]
   digest = "1:4beb546223497fdc767dd15f2f48e271598817cecda2beaf2ad7bf43282d5bf7"
   name = "github.com/labstack/echo"
   packages = [
@@ -34,20 +53,28 @@
   version = "v0.2.8"
 
 [[projects]]
-  digest = "1:0f79867e9aac8a4e20bc1b0956d81f340da9ade9bcc00a4bfb1ebd738c152f7a"
+  digest = "1:69979393fd313159f0eccc6bc260164c8796ef3cbacb943f8ad0bf272b2a5dff"
+  name = "github.com/leodido/go-urn"
+  packages = ["."]
+  pruneopts = ""
+  revision = "70078a794e8ea4b497ba7c19a78cd60f90ccf0f4"
+  version = "v1.1.0"
+
+[[projects]]
+  digest = "1:85fdd2ce48a3fd1ddc4671b972f50a47dcf2eebb24813e90b28a8a1fcf65ee5a"
   name = "github.com/mattn/go-colorable"
   packages = ["."]
   pruneopts = ""
-  revision = "efa589957cd060542a26d2dd7832fd6a6c6c3ade"
-  version = "v0.1.0"
+  revision = "3a70a971f94a22f2fa562ffcc7a0eb45f5daf045"
+  version = "v0.1.1"
 
 [[projects]]
-  digest = "1:3140e04675a6a91d2a20ea9d10bdadf6072085502e6def6768361260aee4b967"
+  digest = "1:5be0052cfccc784a7aa8b3c4ea46e4f2fe1e51fc9d79cc8e1feea638231aea76"
   name = "github.com/mattn/go-isatty"
   packages = ["."]
   pruneopts = ""
-  revision = "6ca4dbf54d38eea1a992b3c722a76a5d1c4cb25c"
-  version = "v0.0.4"
+  revision = "369ecd8cea9851e459abb67eb171853e3986591e"
+  version = "v0.0.6"
 
 [[projects]]
   digest = "1:857a9ecd5cb13379ecc8f798f6e6b6b574c98b9355657d91e068275f1120aaf7"
@@ -67,22 +94,32 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:5462386895a322b94a79a5de7314310edbd5f4d15f851ae032f146b2c951b3de"
+  digest = "1:7a77b79efe106f3304dcf50dc86836151758f246169b527722552a5eb2ae14fc"
   name = "golang.org/x/crypto"
   packages = [
     "acme",
     "acme/autocert",
+    "bcrypt",
+    "blowfish",
   ]
   pruneopts = ""
-  revision = "74369b46fc6756741c016591724fd1cb8e26845f"
+  revision = "8dd112bcdc25174059e45e07517d9fc663123347"
 
 [[projects]]
   branch = "master"
-  digest = "1:991cf54090eb6e382daf2f243a0bcabdda4964a664e07feefbef2b7fb6bf2ae1"
+  digest = "1:e0426ab6a36329d0293c196f10c6dce15ad74fd1751973d4156ab30438636611"
   name = "golang.org/x/sys"
   packages = ["unix"]
   pruneopts = ""
-  revision = "d0b11bdaac8adb652bff00e49bcacf992835621a"
+  revision = "d455e41777fca6e8a5a79e34a14b8368bc11d9ba"
+
+[[projects]]
+  digest = "1:dd95cd9b5ad7438c5149f39b3a4af4d6d0da845df9b51e73d41e89184f124290"
+  name = "gopkg.in/go-playground/validator.v9"
+  packages = ["."]
+  pruneopts = ""
+  revision = "b199fa0642d29caca62b6a99d65cc981ba5edc3b"
+  version = "v9.27.0"
 
 [[projects]]
   branch = "v2"
@@ -102,9 +139,13 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/dgrijalva/jwt-go",
     "github.com/labstack/echo",
     "github.com/labstack/echo/middleware",
+    "golang.org/x/crypto/bcrypt",
+    "gopkg.in/go-playground/validator.v9",
     "gopkg.in/mgo.v2",
+    "gopkg.in/mgo.v2/bson",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
