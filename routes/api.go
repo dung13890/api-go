@@ -18,7 +18,7 @@ func Init(e *echo.Echo, session *mgo.Session) {
 	}))
 	e.HTTPErrorHandler = customHTTPErrorHandler
 	authHandler := providers.NewHttpAuthHandle(session)
-	e.POST("/login", authHandler.Login)
+	e.POST("api/login", authHandler.Login)
 	r := e.Group("/api")
 	r.Use(middleware.JWT([]byte(config.GetString("key"))))
 	r.GET("/users", authHandler.Get)
@@ -34,5 +34,5 @@ func customHTTPErrorHandler(err error, c echo.Context) {
 		message = he.Message.(string)
 	}
 
-	c.JSON(code, resources.Error(message))
+	resources.Error(c, message, code)
 }

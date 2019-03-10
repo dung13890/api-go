@@ -9,9 +9,9 @@ import (
 
 type User struct {
 	Id        bson.ObjectId `bson:"_id,omitempty" json:"id,omitempty"`
-	UserName  string        `json:"username,omitempty"`
-	Password  string        `json:"password,omitempty"`
-	Email     string        `json:"email,omitempty"`
+	UserName  string        `json:"username,omitempty" validate:"required,unique"`
+	Password  string        `json:"password,omitempty" validate:"required"`
+	Email     string        `json:"email,omitempty" validate:"required,email,unique"`
 	CreatedAt time.Time     `json:"created_at, omitempty"`
 	UpdatedAt time.Time     `json:"updated_at, omitempty"`
 }

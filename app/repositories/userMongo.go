@@ -23,7 +23,7 @@ func UserMongoImplement(session *mgo.Session) contracts.UserRepo {
 
 func (u *UserMongo) Find(id string) (models.User, error) {
 	m := models.User{}
-	err := u.collection.Find(bson.M{"_id": bson.ObjectIdHex(id)}).One(&m)
+	err := u.collection.Find(bson.M{"_id": bson.ObjectIdHex(id)}).Select(bson.M{"password": 0}).One(&m)
 
 	return m, err
 }
@@ -48,13 +48,9 @@ func (u *UserMongo) Store(p models.User) (models.User, error) {
 	return rs, err
 }
 
-func (u *UserMongo) GetAll() []models.User {
+func (u *UserMongo) GetAll() ([]models.User, error) {
 	users := []models.User{}
-	iter := u.collection.Find(nil).Iter()
-	user := models.User{}
-	for iter.Next(&user) {
-		users = append(users, user)
-	}
+	err := u.collection.Find(nil).Select(bson.M{"password": 0}).All(&users)
 
-	return users
+	return users, err
 }

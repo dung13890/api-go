@@ -1,38 +1,48 @@
 package resources
 
 import (
+	"net/http"
+
 	"github.com/dung13890/api-go/models"
+	"github.com/labstack/echo"
 )
 
-type resource struct {
-	Data     interface{} `json:"data"`
-	Messages []string    `json:"messages"`
-}
-
-func Error(m string) resource {
-	return resource{
-		Data:     nil,
-		Messages: []string{m},
-	}
-}
-
-func Login(rs map[string]string, m string) resource {
-	return resource{
+func Login(c echo.Context, rs map[string]string) error {
+	return c.JSON(http.StatusOK, resource{
 		Data:     rs,
-		Messages: []string{m},
-	}
+		Messages: []string{"Login Success!"},
+	})
 }
 
-func Collection(rs []models.User, m string) resource {
-	return resource{
-		Data:     rs,
-		Messages: []string{m},
+func Collection(c echo.Context, rs []models.User, m ...string) error {
+	messages := []string{}
+	if len(m) == 0 {
+		messages = []string{"Success!"}
 	}
+	if len(m) > 0 {
+		for _, i := range m {
+			messages = append(messages, i)
+		}
+	}
+
+	return c.JSON(http.StatusOK, resource{
+		Data:     rs,
+		Messages: m,
+	})
 }
 
-func Model(rs models.User, m string) resource {
-	return resource{
-		Data:     rs,
-		Messages: []string{m},
+func Model(c echo.Context, rs models.User, m ...string) error {
+	messages := []string{}
+	if len(m) == 0 {
+		messages = []string{"Success!"}
 	}
+	if len(m) > 0 {
+		for _, i := range m {
+			messages = append(messages, i)
+		}
+	}
+	return c.JSON(http.StatusOK, resource{
+		Data:     rs,
+		Messages: messages,
+	})
 }
