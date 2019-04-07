@@ -64,6 +64,10 @@ func (a *HttpAuthHandler) Store(c echo.Context) error {
 	if ctx == nil {
 		ctx = context.Background()
 	}
+	errV := validators.UserStore(&params)
+	if len(errV) > 0 {
+		return resources.Validate(c, errV)
+	}
 	rs, err := a.AuthService.Store(ctx, params)
 	if err != nil {
 		return resources.Error(c, err.Error())

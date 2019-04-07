@@ -43,7 +43,7 @@ func (u *UserMongo) Store(p models.User) (models.User, error) {
 	err := u.collection.Insert(&p)
 
 	rs := models.User{}
-	u.collection.FindId(p.Id).One(&rs)
+	u.collection.FindId(p.Id).Select(bson.M{"password": 0}).One(&rs)
 
 	return rs, err
 }
